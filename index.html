@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refleksi NGOPAI - Ulfatul Husna</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kemenag: {
+                            50: '#f2fbf5',
+                            100: '#e1f6e8',
+                            500: '#22c55e', // Warna hijau identik Kemenag
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            background-color: #f3f4f6;
+            background-image: radial-gradient(#22c55e22 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Star Rating Hover Effects */
+        .star-rating i {
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+        .star-rating i:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased min-h-screen py-10 px-4 sm:px-6 lg:px-8 font-sans flex flex-col items-center">
+
+    <div class="max-w-4xl w-full">
+        <!-- Logo Section -->
+        <div class="flex justify-center mb-6">
+            <img alt="Logo Kemenag" class="h-24 md:h-32 object-contain drop-shadow-md" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxOOktWOqEBBQa1zolQ65LTM0L_6JufqyB4diA9Gaka1BgIjoyWPDIfZwkTcXM-1oRemsDxV1e6ps2n_EpWiyH5CINdB0UBy3zFV52h1AiZtobJvnaeKGagMqOXEnE1nnxO2Su3YNcFprFqUJH3YXa2rKGvikJuo4nue_ta09etZGiPrxzks2V0hLd0cOJ/s320/Logo%20kemenag.png"/>
+        </div>
+
+        <!-- Header Information & Intro Text -->
+        <div class="glass-card rounded-2xl shadow-xl p-8 md:p-10 mb-8 border-t-4 border-kemenag-500 relative overflow-hidden">
+            <div class="text-center mb-6">
+                <span class="inline-block py-1 px-3 rounded-full bg-kemenag-100 text-kemenag-700 font-semibold text-sm mb-4 tracking-wider uppercase">
+                    NGOPAI (Ngobrol Pendidikan Agama Islam)
+                </span>
+                <p class="text-gray-500 text-sm mb-4">30 September 2026 | Bidang PAIS Kanwil Kemenag Prov. Jawa Timur</p>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-kemenag-900 mb-6 leading-tight">
+                    Level Up Guru PAI: <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-kemenag-600 to-yellow-500">
+                        Mengajar dengan Hati & Hack Administrasi dengan AI
+                    </span>
+                </h2>
+            </div>
+            
+            <div class="prose max-w-none text-gray-700 text-justify md:text-left leading-relaxed">
+                <p class="mb-4 text-lg">
+                    <strong>Assalamu'alaikum Warahmatullahi Wabarakatuh,</strong>
+                </p>
+                <p class="mb-4">
+                    Terima kasih telah berpartisipasi dalam sesi NGOPAI bersama <strong>Ulfatul Husna, S.Ag., M.Pd.</strong> Paradigma <em>Deep Learning</em> dalam Kurikulum Merdeka menuntut kita untuk menghadirkan pembelajaran yang bermakna, personal, dan berpusat pada peserta didik. Namun, beban administrasi seringkali menyita energi pendidik.
+                </p>
+                <p class="mb-6">
+                    Melalui <em>Artificial Intelligence</em> (AI), kita dapat melakukan "hack" efisiensi penyusunan mulai dari Modul Ajar, Asesmen Diagnostik, Media Pembelajaran, hingga Refleksi, sehingga esensi utama kita—<strong>Mengajar dengan Hati</strong>—tetap terjaga. 
+                </p>
+                <div class="font-semibold text-kemenag-700 bg-kemenag-50 p-5 rounded-xl border-l-4 border-kemenag-500 shadow-sm flex items-start gap-4">
+                    <i class="fas fa-info-circle text-2xl mt-1 text-kemenag-500"></i>
+                    <p>Mohon kesediaannya untuk mengisi form refleksi di bawah ini. Data Anda akan terekam dan menjadi bahan evaluasi serta penyusunan strategi pendidikan kita ke depan.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reflection Form -->
+        <form id="reflectionForm" class="glass-card rounded-2xl shadow-xl p-8 md:p-10 mb-8 relative">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-3">Lembar Refleksi</h3>
+            
+            <input type="hidden" id="ratingInput" name="rating" value="0">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Nama -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2" for="nama">Nama Lengkap & Gelar</label>
+                    <input type="text" id="nama" name="nama" required placeholder="Contoh: Ahmad, S.Pd.I" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-kemenag-500 focus:ring-2 focus:ring-kemenag-200 transition-all outline-none">
+                </div>
+                <!-- Instansi -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2" for="instansi">Asal Sekolah / Instansi</label>
+                    <input type="text" id="instansi" name="instansi" required placeholder="Contoh: SMAN 1 Surabaya" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-kemenag-500 focus:ring-2 focus:ring-kemenag-200 transition-all outline-none">
+                </div>
+            </div>
+
+            <div class="space-y-8 mb-8">
+                <!-- Skala Pemahaman -->
+                <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                    <label class="block text-gray-800 font-bold mb-4">
+                        1. Seberapa paham Anda tentang pemanfaatan AI untuk membantu penyusunan administrasi (Modul Ajar, Asesmen, dll) setelah sesi ini?
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="pemahaman_ai" value="Sangat Paham" class="peer sr-only" required>
+                            <div class="rounded-lg border border-gray-200 px-4 py-3 hover:bg-gray-50 peer-checked:bg-kemenag-50 peer-checked:border-kemenag-500 peer-checked:text-kemenag-700 transition-all text-center text-sm font-medium">Sangat Paham</div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="pemahaman_ai" value="Paham" class="peer sr-only">
+                            <div class="rounded-lg border border-gray-200 px-4 py-3 hover:bg-gray-50 peer-checked:bg-kemenag-50 peer-checked:border-kemenag-500 peer-checked:text-kemenag-700 transition-all text-center text-sm font-medium">Paham</div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="pemahaman_ai" value="Kurang Paham" class="peer sr-only">
+                            <div class="rounded-lg border border-gray-200 px-4 py-3 hover:bg-gray-50 peer-checked:bg-kemenag-50 peer-checked:border-kemenag-500 peer-checked:text-kemenag-700 transition-all text-center text-sm font-medium">Kurang Paham</div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="pemahaman_ai" value="Tidak Paham" class="peer sr-only">
+                            <div class="rounded-lg border border-gray-200 px-4 py-3 hover:bg-gray-50 peer-checked:bg-kemenag-50 peer-checked:border-kemenag-500 peer-checked:text-kemenag-700 transition-all text-center text-sm font-medium">Tidak Paham</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Skala Sikap -->
+                <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                    <label class="block text-gray-800 font-bold mb-4">
+                        2. Apakah Anda setuju bahwa AI tidak menggantikan peran guru, melainkan membebaskan guru dari beban administrasi agar bisa lebih fokus "Mengajar dengan Hati"?
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="sikap_humanis" value="Sangat Setuju" class="peer sr-only" required>
+                            <div class="rounded-lg border border-gray-200 px-4 py-3 hover:bg-gray-50 peer-checked:bg-blue-50 peer-checked:border-blue-500 peer-checked:text-blue-700 transition-all text-center text-sm font-medium">Sangat Setuju</div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="sikap_humanis" value="Setuju" class="peer sr-only">
+                            <div class="rounded-lg border border-gray-200 px-4 py-3 hover:bg-gray-50 peer-checked:bg-blue-50 peer-checked:border-blue-500 peer-checked:text-blue-700 transition-all text-center text-sm font-medium">Setuju</div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="sikap_humanis" value="Kurang Setuju" class="peer sr-only">
+                            <div class="rounded-lg border border-gray-200 px-4 py-3 hover:bg-gray-50 peer-checked:bg-blue-50 peer-checked:border-blue-500 peer-checked:text-blue-700 transition-all text-center text-sm font-medium">Kurang Setuju</div>
+                        </label>
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="sikap_humanis" value="Tidak Setuju" class="peer sr-only">
+                            <div class="rounded-lg border border-gray-200 px-4 py-3 hover:bg-gray-50 peer-checked:bg-blue-50 peer-checked:border-blue-500 peer-checked:text-blue-700 transition-all text-center text-sm font-medium">Tidak Setuju</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6 mb-8">
+                <!-- Insight -->
+                <div>
+                    <label class="block text-gray-800 font-bold mb-2" for="insight">3. Apa hal paling menarik/baru (Aha! Moment) yang Bapak/Ibu dapatkan dari materi hari ini?</label>
+                    <textarea id="insight" name="insight" required rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-kemenag-500 focus:ring-2 focus:ring-kemenag-200 transition-all outline-none resize-none"></textarea>
+                </div>
+                
+                <!-- Implementasi -->
+                <div>
+                    <label class="block text-gray-800 font-bold mb-2" for="implementasi">4. Alat/Prompt AI apa yang ingin segera Bapak/Ibu coba praktekkan di kelas atau untuk sekolah?</label>
+                    <textarea id="implementasi" name="implementasi" required rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-kemenag-500 focus:ring-2 focus:ring-kemenag-200 transition-all outline-none resize-none"></textarea>
+                </div>
+
+                <!-- Komitmen -->
+                <div>
+                    <label class="block text-gray-800 font-bold mb-2" for="komitmen">5. Tuliskan satu kalimat komitmen Bapak/Ibu sebagai Guru PAI setelah mengikuti kegiatan ini!</label>
+                    <textarea id="komitmen" name="komitmen" required rows="2" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-kemenag-500 focus:ring-2 focus:ring-kemenag-200 transition-all outline-none resize-none"></textarea>
+                </div>
+            </div>
+
+            <!-- Rating -->
+            <div class="mb-10 text-center bg-gray-50 p-6 rounded-xl border border-gray-100">
+                <label class="block text-gray-800 font-bold mb-4">Seberapa puas Anda dengan sesi materi hari ini?</label>
+                <div class="star-rating text-4xl text-gray-300 flex justify-center gap-2 cursor-pointer" id="starContainer">
+                    <i class="fas fa-star" data-rating="1"></i>
+                    <i class="fas fa-star" data-rating="2"></i>
+                    <i class="fas fa-star" data-rating="3"></i>
+                    <i class="fas fa-star" data-rating="4"></i>
+                    <i class="fas fa-star" data-rating="5"></i>
+                </div>
+                <p id="ratingFeedback" class="text-sm font-medium mt-3 text-kemenag-600 h-5"></p>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-kemenag-600 to-kemenag-500 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl hover:from-kemenag-700 hover:to-kemenag-600 transform transition hover:-translate-y-1 flex justify-center items-center gap-2 text-lg">
+                <i class="fas fa-paper-plane"></i> Kirim Refleksi
+            </button>
+        </form>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm pb-8 font-medium">
+            <p>created by : <span class="font-bold text-gray-700">Ulfatul Husna, S.Ag.,M.Pd.</span></p>
+        </footer>
+    </div>
+
+    <script>
+        const form = document.getElementById('reflectionForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = submitBtn.innerHTML;
+
+        // --- URL GOOGLE APPS SCRIPT ---
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby2RYtsWlGqhqU6cqXOkXkMEpHBmfbTpvxADmpTzEQmreZvcjCwPVJ-oswkpnKy8eef/exec';
+
+        // Star Rating Logic
+        const stars = document.querySelectorAll('.star-rating i');
+        const ratingInput = document.getElementById('ratingInput');
+        const ratingFeedback = document.getElementById('ratingFeedback');
+        const feedbackTexts = ["Kurang Memuaskan", "Cukup", "Bagus", "Sangat Bagus", "Luar Biasa! Menginspirasi"];
+
+        let currentRating = 0;
+
+        stars.forEach(star => {
+            star.addEventListener('mouseover', function() {
+                const hoverVal = this.getAttribute('data-rating');
+                highlightStars(hoverVal);
+            });
+
+            star.addEventListener('mouseout', function() {
+                highlightStars(currentRating);
+            });
+
+            star.addEventListener('click', function() {
+                currentRating = this.getAttribute('data-rating');
+                ratingInput.value = currentRating;
+                ratingFeedback.textContent = feedbackTexts[currentRating - 1];
+                highlightStars(currentRating);
+            });
+        });
+
+        function highlightStars(val) {
+            stars.forEach(s => {
+                if(s.getAttribute('data-rating') <= val) {
+                    s.classList.remove('text-gray-300');
+                    s.classList.add('text-yellow-400');
+                } else {
+                    s.classList.remove('text-yellow-400');
+                    s.classList.add('text-gray-300');
+                }
+            });
+        }
+
+        // Form Submit Logic
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Validasi Rating
+            if(ratingInput.value == 0) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Mohon berikan rating bintang terlebih dahulu!',
+                    confirmButtonColor: '#16a34a'
+                });
+                return;
+            }
+
+            // UI Loading State
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sedang Mengirim...';
+            submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    // Success Popup
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Alhamdulillah, Berhasil!',
+                        text: 'Terima kasih atas partisipasi dan refleksinya di sesi NGOPAI ini.',
+                        confirmButtonColor: '#16a34a',
+                        confirmButtonText: 'Tutup'
+                    }).then(() => {
+                        form.reset();
+                        currentRating = 0;
+                        highlightStars(0);
+                        ratingFeedback.textContent = '';
+                    });
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            } catch (error) {
+                // Error Popup
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal Mengirim',
+                    text: 'Pastikan koneksi internet stabil dan coba beberapa saat lagi.',
+                    confirmButtonColor: '#d33'
+                });
+                console.error('Error!', error.message);
+            } finally {
+                // Reset UI Button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = btnText;
+                submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+            }
+        });
+    </script>
+</body>
+</html>
